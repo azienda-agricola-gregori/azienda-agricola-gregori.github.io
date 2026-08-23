@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azienda Agricola Gregori | Produzione Latte</title>
+    <!-- Importazione Font Moderni -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital@1&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Scorrimento fluido per tutta la pagina */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Variabili Colori */
+        :root {
+            --dark-green: #2B422C;
+            --light-bg: #F4F3EF;
+            --accent-color: #8C7A6B;
+            --text-dark: #222222;
+            --text-light: #FFFFFF;
+        }
+
+        /* Reset base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        section, footer, header {
+            scroll-margin-top: 70px;
+        }
+
+        /* Navbar Semplice */
+        nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--dark-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section con Slideshow */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 0 1rem;
+            overflow: hidden;
+        }
+
+        .slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slideshow::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.45);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--dark-green);
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.2s;
+            border: 2px solid var(--dark-green);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--text-light);
+            border-color: var(--text-light);
+        }
+
+        /* --- NUOVO BANNER IN EVIDENZA B2B --- */
+        .announcement-banner {
+            background-color: var(--dark-green);
+            color: var(--text-light);
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .announcement-banner h2 {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .announcement-banner p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto 2.5rem auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Pulsante con bordo bianco per il banner scuro */
+        .btn-light {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: transparent;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: background 0.3s, color 0.3s;
+            border: 2px solid var(--text-light);
+        }
+
+        .btn-light:hover {
+            background-color: var(--text-light);
+            color: var(--dark-green);
+        }
+
+        /* Griglia Valori/Produzione */
+        .values-section {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+
+        .values-section h2 {
+            font-size: 2.5rem;
+            color: var(--dark-green);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .grid-item {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .grid-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 1rem 1rem 1rem;
+            text-align: left;
+        }
+
+        .grid-item .overlay h3 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Sezione Divisa (Testo - Mappa) */
+        .split-section {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #fff;
+        }
+
+        .split-content {
+            flex: 1 1 500px;
+            padding: 6rem 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .split-content h2 {
+            font-size: 2.2rem;
+            color: var(--dark-green);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .split-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .split-map {
+            flex: 1 1 500px;
+            min-height: 500px;
+            display: flex;
+        }
+
+        .split-map iframe {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            min-height: 500px;
+        }
+/* Footer */
+footer {
+    background-color: #1A1A1A;
+    color: #ccc;
+    padding: 4rem 5%;
+    text-align: center;
+}
+
+footer h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+/* Stile per il link dell'email */
+footer a {
+    color: #FFFFFF;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--accent-color);
+}
+    </style>
+</head>
+<body>
+
+    <!-- Navigazione -->
+    <nav>
+        <div class="logo">Azienda Agricola Gregori</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#avviso-b2b">Collaborazioni</a></li>
+            <li><a href="#produzione">Produzione</a></li>
+            <li><a href="#chi-siamo">L'Azienda</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+        </ul>
+    </nav>
+
+      <!-- BANNER IN EVIDENZA (ID: avviso-b2b) -->
+    <section class="announcement-banner" id="avviso-b2b">
+        <h2>Ricerca Partner e Caseifici</h2>
+        <p>Attualmente stiamo cercando caseifici, latterie o aziende del settore agroalimentare interessate all'acquisto all'ingrosso del nostro latte fresco. Offriamo un prodotto di qualità superiore, tracciabile e proveniente da allevamenti rispettosi del benessere animale.</p>
+        <a href="#contatti" class="btn-light">Contattaci per una fornitura</a>
+    </section>
+
+    <!-- Hero con Slideshow (ID: home) -->
+    <header class="hero" id="home">
+        <!-- Sfondo che scorre -->
+        <div class="slideshow">
+            <div class="slide active" style="background-image: url('img/img9.jpg');"></div>
+            <div class="slide" style="background-image: url('img/img6.jpg');"></div>
+            <div class="slide" style="background-image: url('img/img4.jpg');"></div>
+            <div class="slide" style="background-image: url('img/img5.jpg');"></div>
+            <div class="slide" style="background-image: url('img/img2.jpg');"></div>
+        </div>
+
+        <!-- Testo sopra le immagini -->
+        <div class="hero-content">
+            <h1>Puro, semplice, genuino</h1>
+            <p>Latte fresco d'eccellenza, nato dal totale rispetto per i nostri animali. Lavoriamo ogni giorno con dedizione e passione per produrre una materia prima di altissima qualità, espressione autentica della nostra terra.</p>
+            <a href="#produzione" class="btn">Scopri il nostro impegno</a>
+        </div>
+    </header>
+
+  
+
+    <!-- Griglia Produzione (ID: produzione) -->
+    <section class="values-section" id="produzione">
+        <h2>La nostra eccellenza</h2>
+        
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="img/img3.jpg" alt="Latte">
+                <div class="overlay">
+                    <h3>Latte Fresco di Qualità</h3>
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="img/img1.jpg" alt="Mucche al pascolo">
+                <div class="overlay">
+                    <h3>Benessere Animale</h3>
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="img/img7.jpg" alt="Foraggio e terra">
+                <div class="overlay">
+                    <h3>Alimentazione Naturale</h3>
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="img/img8.jpg" alt="Pascoli">
+                <div class="overlay">
+                    <h3>Rispetto per la Terra</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chi Siamo & Mappa (ID: chi-siamo) -->
+    <section class="split-section" id="chi-siamo">
+        <div class="split-content">
+            <h2>L'Impegno della nostra Famiglia</h2>
+            <p>
+                La nostra storia affonda le radici nel passato: da diverse generazioni, l'Azienda Agricola Gregori si tramanda di padre in figlio. Nata originariamente come piccola attività di sostentamento familiare, oggi è una realtà agricola strutturata, mossa dalla stessa passione di un tempo.
+            </p>
+            <p>
+                I nostri principi sono rimasti immutati: massimo rispetto per la natura, dedizione al lavoro e una cura meticolosa dei nostri animali per offrire sempre un latte sano e genuino, ideale per le migliori lavorazioni casearie.
+            </p>
+        </div>
+        
+        <div class="split-map">
+            <iframe 
+                src="https://www.google.com/maps?q=Via+Presso+68,+Sale+Marasino+BS&output=embed" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </section>
+
+    <!-- Footer / Contatti (ID: contatti) -->
+    <footer id="contatti">
+        <h4>Azienda Agricola Gregori</h4>
+        <p>Via presso 68, Sale Marasino (BS)</p>
+        <p>Email: <a href="mailto:claudio.gregori1982@alice.it">claudio.gregori1982@alice.it</a> | Whatsapp: 3402654629</p>
+        <br>
+        <p><small>© 2026 Azienda Agricola Gregori. Tutti i diritti riservati.</small></p>
+    </footer>
+
+    <!-- SCRIPT PER LO SCORRIMENTO IMMAGINI -->
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000); 
+    </script>
+
+</body>
+</html>
