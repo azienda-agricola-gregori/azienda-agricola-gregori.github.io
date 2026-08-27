@@ -258,21 +258,41 @@
             transform: scale(1.05);
         }
 
+        /* Didascalia e sovrapposizione animata */
         .grid-item .overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
             color: white;
-            padding: 2rem 1rem 1rem 1rem;
+            padding: 2rem 1.2rem 1.2rem 1.2rem;
             text-align: left;
+            transition: background 0.4s ease;
         }
 
         .grid-item .overlay h3 {
             font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        .grid-item .overlay p {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease, max-height 0.4s ease;
+            font-weight: 300;
+            line-height: 1.4;
+            color: #E0E0E0;
+        }
+
+        /* Effetto al passaggio del mouse */
+        .grid-item:hover .overlay p {
+            opacity: 1;
+            max-height: 100px;
         }
 
         /* Sezione Divisa (Testo - Mappa) */
@@ -365,7 +385,7 @@
                 font-size: 0.7rem;
             }
             section, footer, header {
-                scroll-margin-top: 100px; /* Aumentato leggermente il margine per evitare sovrapposizioni col menu a due righe */
+                scroll-margin-top: 100px;
             }
         }
     </style>
@@ -417,24 +437,28 @@
                 <img src="img/img3.jpg" alt="Latte">
                 <div class="overlay">
                     <h3>Latte Fresco di Qualità</h3>
+                    <p>Materia prima controllata e mossa ogni giorno con elevati standard igienico-sanitari.</p>
                 </div>
             </div>
             <div class="grid-item">
                 <img src="img/img1.jpg" alt="Mucche al pascolo">
                 <div class="overlay">
                     <h3>Benessere Animale</h3>
+                    <p>Spazi ampi e cure quotidiane per garantire la massima serenità e salute alle nostre bovine.</p>
                 </div>
             </div>
             <div class="grid-item">
                 <img src="img/img7.jpg" alt="Foraggio e terra">
                 <div class="overlay">
                     <h3>Alimentazione Naturale</h3>
+                    <p>Foraggi di prima scelta per garantire un latte ricco di nutrienti e dal sapore genuino.</p>
                 </div>
             </div>
             <div class="grid-item">
                 <img src="img/img8.jpg" alt="Pascoli">
                 <div class="overlay">
                     <h3>Rispetto per la Terra</h3>
+                    <p>Pratiche di allevamento sostenibili a tutela del nostro territorio e della natura circostante.</p>
                 </div>
             </div>
         </div>
