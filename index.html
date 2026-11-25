@@ -2,12 +2,13 @@
 <html lang="it">
 <head>
     
+    <!-- Google Tag Manager -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+    </script>
     <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-58FX2WGW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-</script>
+    <!-- End Google Tag Manager -->
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -145,7 +146,7 @@
         .hero-content {
             position: relative;
             z-index: 3;
-            margin-top: 60px; /* Spazio per non coprire col menu fisso */
+            margin-top: 60px;
         }
 
         .hero h1 {
@@ -400,6 +401,11 @@
 </head>
 <body>
 
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58FX2WGW"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <!-- Navigazione -->
     <nav>
         <div class="logo">Azienda Agricola Gregori</div>
@@ -416,7 +422,7 @@
     <section class="announcement-banner" id="avviso-b2b">
         <h2>Ricerca Partner e Caseifici</h2>
         <p>Attualmente stiamo cercando caseifici, latterie o aziende del settore agroalimentare interessate all'acquisto all'ingrosso del nostro latte fresco. Offriamo un prodotto di qualità superiore, tracciabile e proveniente da allevamenti rispettosi del benessere animale.</p>
-        <a href="#contatti" class="btn-light">Contattaci per una fornitura</a>
+        <a href="#contatti" class="btn-light" id="btn-fornitura">Contattaci per una fornitura</a>
     </section>
 
     <!-- Hero con Slideshow -->
@@ -498,13 +504,17 @@
     <footer id="contatti">
         <h4>Azienda Agricola Gregori</h4>
         <p>Via presso 68, Sale Marasino (BS)</p>
-        <p>Email: <a href="mailto:claudio.gregori1982@alice.it">claudio.gregori1982@alice.it</a> | Whatsapp: 3402654629</p>
+        <p>
+            Email: <a href="mailto:claudio.gregori1982@alice.it" id="link-email">claudio.gregori1982@alice.it</a> | 
+            Whatsapp: <a href="https://wa.me/393402654629" target="_blank" rel="noopener" id="link-whatsapp">3402654629</a>
+        </p>
         <br>
         <p><small>© 2026 Azienda Agricola Gregori. Tutti i diritti riservati.</small></p>
     </footer>
 
-    <!-- SCRIPT PER LO SCORRIMENTO IMMAGINI -->
+    <!-- SCRIPT PER LO SCORRIMENTO IMMAGINI E TRACCIAMENTO EVENTI -->
     <script>
+        // Slideshow
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
 
@@ -512,7 +522,31 @@
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 5000); 
+        }, 5000);
+
+        // Tracciamento eventi importanti su dataLayer (Google Tag Manager)
+        window.dataLayer = window.dataLayer || [];
+
+        document.getElementById('btn-fornitura').addEventListener('click', () => {
+            window.dataLayer.push({
+                event: 'click_richiesta_fornitura',
+                azione: 'CTA Banner B2B'
+            });
+        });
+
+        document.getElementById('link-email').addEventListener('click', () => {
+            window.dataLayer.push({
+                event: 'contatto_email',
+                metodo_contatto: 'email'
+            });
+        });
+
+        document.getElementById('link-whatsapp').addEventListener('click', () => {
+            window.dataLayer.push({
+                event: 'contatto_whatsapp',
+                metodo_contatto: 'whatsapp'
+            });
+        });
     </script>
 
 </body>
