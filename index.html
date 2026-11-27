@@ -2,13 +2,14 @@
 <html lang="it">
 <head>
     
-    <!-- Google Tag Manager -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L7XHKBTZZ1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L7XHKBTZZ1');
     </script>
-    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-58FX2WGW"></script>
-    <!-- End Google Tag Manager -->
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -401,11 +402,6 @@
 </head>
 <body>
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58FX2WGW"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
     <!-- Navigazione -->
     <nav>
         <div class="logo">Azienda Agricola Gregori</div>
@@ -524,26 +520,21 @@
             slides[currentSlide].classList.add('active');
         }, 5000);
 
-        // Tracciamento eventi importanti su dataLayer (Google Tag Manager)
-        window.dataLayer = window.dataLayer || [];
-
+        // Tracciamento eventi importanti su Google Analytics (gtag.js)
         document.getElementById('btn-fornitura').addEventListener('click', () => {
-            window.dataLayer.push({
-                event: 'click_richiesta_fornitura',
+            gtag('event', 'click_richiesta_fornitura', {
                 azione: 'CTA Banner B2B'
             });
         });
 
         document.getElementById('link-email').addEventListener('click', () => {
-            window.dataLayer.push({
-                event: 'contatto_email',
+            gtag('event', 'contatto_email', {
                 metodo_contatto: 'email'
             });
         });
 
         document.getElementById('link-whatsapp').addEventListener('click', () => {
-            window.dataLayer.push({
-                event: 'contatto_whatsapp',
+            gtag('event', 'contatto_whatsapp', {
                 metodo_contatto: 'whatsapp'
             });
         });
